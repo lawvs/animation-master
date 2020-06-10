@@ -1,0 +1,15 @@
+{
+  "name": "animation-master",
+  "version": "0.0.1",
+  "description": "animation",
+  "main": "",
+  "scripts": {
+    "dev": "browser-sync start --server --watch"
+  },
+  "repository": "git@github.com:lawvs/animation-master.git",
+  "author": "lawvs <litusq@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.26.7"
+  }
+}
