@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+}
+
+#main {
+  width: 100vw;
+  height: 100vh;
+  background: #e9b59f;
+  overflow: hidden;
+}
+
+:root {
+  --shape-width: 15vmin;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.shape {
+  box-sizing: border-box;
+  width: var(--shape-width);
+  height: var(--shape-width);
+  border: white solid calc(var(--shape-width) * 0.2);
+  background: #409ad5;
+  transform-origin: left bottom;
+}
+
+.a {
+  --easeInCubic: cubic-bezier(0.32, 0, 0.67, 0);
+  animation: flip 4s var(--easeInCubic) forwards infinite;
+}
+
+.b {
+  --easeInOutBack: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  animation: flip 2s var(--easeInOutBack) forwards infinite;
+}
+
+@keyframes flip {
+  0%,
+  10% {
+    transform: rotate(0deg);
+  }
+
+  40%,
+  60% {
+    transform: rotate(-90deg);
+  }
+
+  90%,
+  100% {
+    transform: rotate(0deg);
+  }
+}
