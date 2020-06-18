@@ -3,16 +3,23 @@ const sleep = (duration) =>
 
 // polyfill `animate.finished`
 // See https://github.com/web-animations/web-animations-js/blob/dev/src/web-animations-next-animation.js#L168
-window.Element.prototype.animate = new Proxy(window.Element.prototype.animate, {
-  apply(target, ctx, args) {
-    const animate = Reflect.apply(target, ctx, args)
+'finished' in Animation.prototype ||
+  (window.Element.prototype.animate = new Proxy(
+    window.Element.prototype.animate,
+    {
+      apply(target, ctx, args) {
+        const animate = Reflect.apply(target, ctx, args)
 
-    animate.finished = new Promise((res) =>
-      animate.addEventListener('finish', () => res(animate), { once: true })
-    )
-    return animate
-  },
-})
+        animate.finished = new Promise((res) =>
+          animate.addEventListener('finish', () => res(animate), {
+            once: true,
+            passive: true,
+          })
+        )
+        return animate
+      },
+    }
+  ))
 
 /**
  *
