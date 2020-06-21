@@ -1,30 +1,32 @@
 const sleep = (duration) =>
   new Promise((res) => setTimeout(() => res(), duration))
 
-// polyfill `animate.finished`
-// See https://github.com/web-animations/web-animations-js/blob/dev/src/web-animations-next-animation.js#L168
-window.Element.prototype.animate = new Proxy(window.Element.prototype.animate, {
-  apply(target, ctx, args) {
-    const [keyframes, options] = args
-    let animateDuration = 0
+// A simple polyfill for `animate.finished`
+// For full implementation please see
+// https://github.com/web-animations/web-animations-js/blob/dev/src/web-animations-next-animation.js#L168
+if (!('finished' in Animation.prototype)) {
+  window.Element.prototype.animate = new Proxy(
+    window.Element.prototype.animate,
+    {
+      apply(target, ctx, args) {
+        const animate = Reflect.apply(target, ctx, args)
 
-    if (typeof options === 'object') {
-      animateDuration =
-        (options.duration || 0) + (options.delay || 0) + (options.endDelay || 0)
-    } else if (options) {
-      animateDuration = options
-    } else {
-      animateDuration = 0
+        animate.finished = new Promise((res) => {
+          if (animate.playState === 'finished') {
+            res(animate)
+            return
+          }
+
+          animate.addEventListener('finish', () => res(animate), {
+            once: true,
+            passive: true,
+          })
+        })
+        return animate
+      },
     }
-
-    const animate = Reflect.apply(target, ctx, args)
-
-    animate.finished = new Promise((res) =>
-      setTimeout(() => res(animate), animateDuration)
-    )
-    return animate
-  },
-})
+  )
+}
 
 const animation = async (shape, step = false) => {
   // https://easings.net/#
