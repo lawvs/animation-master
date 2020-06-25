@@ -32,8 +32,8 @@ body {
 .shape {
   opacity: 0;
   --easeInBackOutQuart: cubic-bezier(0.64, -0.36, 0.1, 1);
-  animation: move 4s 1.2s var(--easeInBackOutQuart) infinite,
-    skew 4s 1.2s var(--easeInBackOutQuart) infinite;
+  animation: move 4s var(--easeInBackOutQuart) infinite,
+    skew 4s var(--easeInBackOutQuart) infinite;
 }
 
 .shape::before {
