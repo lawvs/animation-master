@@ -6,20 +6,9 @@ const TMP_PATH = path.join('build', 'tmp')
 const OUTPUT_PATH = path.join('build', 'thumbnail')
 ensureDirSync(OUTPUT_PATH)
 
-const options = {
-  args: [
-    '--no-sandbox',
-    '--disable-setuid-sandbox',
-    '--disable-infobars',
-    '--window-position=0,0',
-  ],
-  headless: true,
-  ignoreHTTPSErrors: true,
-}
-
 let browser: puppeteer.Browser = null
 
-export const createPuppeteerBrowser = async () => {
+export const setupBrowser = async () => {
   if (browser) await browser?.close()
   // See https://github.com/puppeteer/puppeteer/issues/1837
   const options = {
@@ -40,12 +29,15 @@ export const createPuppeteerBrowser = async () => {
   return browser
 }
 
-export const screenshot = async ({
+export const takeScreenshot = async ({
   url,
-  viewport,
+  viewport = {
+    width: 500,
+    height: 300,
+  },
 }: {
   url: string
-  viewport: puppeteer.Viewport
+  viewport?: puppeteer.Viewport
 }) => {
   if (!browser) {
     throw new Error(
@@ -61,6 +53,8 @@ export const screenshot = async ({
     OUTPUT_PATH,
     `${encodeURIComponent(new URL(url).pathname)}.png`
   )
+  // Wait some preparation animation
+  await page.waitFor(500)
   await page.screenshot({
     path: screenshotPath,
     fullPage: true,
@@ -69,9 +63,19 @@ export const screenshot = async ({
   return screenshotPath
 }
 
-export const closePuppeteerBrowser = async () => {
+export const closeBrowser = async () => {
   await browser?.close()
   browser = null
 }
 
-export const getPuppeteerBrowser = () => browser
+export const getBrowser = () => browser
+
+if (require.main === module) {
+  const url = process.argv[2]
+
+  setupBrowser().then(async () => {
+    const screenshotPath = await takeScreenshot({ url })
+    console.log(screenshotPath)
+    closeBrowser()
+  })
+}

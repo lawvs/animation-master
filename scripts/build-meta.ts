@@ -3,11 +3,7 @@ import * as path from 'path'
 
 import { JSDOM } from 'jsdom'
 import { launchStaticServer } from './server'
-import {
-  createPuppeteerBrowser,
-  closePuppeteerBrowser,
-  screenshot,
-} from './puppeteer'
+import { setupBrowser, closeBrowser, takeScreenshot } from './puppeteer'
 
 const OUTPUT_PATH = path.resolve('build')
 const FOLDER = 'content'
@@ -21,14 +17,10 @@ const parseHTML = (html: string) => {
 }
 
 const buildMeta = async () => {
-  const thumbnailSize = {
-    width: 500,
-    height: 300,
-  }
   const port = 5000
   const host = `localhost:${port}`
   const server = launchStaticServer({ port, directory: FOLDER })
-  await createPuppeteerBrowser()
+  await setupBrowser()
 
   const meta = await Promise.all(
     fs
@@ -50,9 +42,8 @@ const buildMeta = async () => {
               const curPath = path.join(FOLDER, collectionDir, itemDir)
               const thumbnail = path.relative(
                 OUTPUT_PATH,
-                await screenshot({
+                await takeScreenshot({
                   url: `http://${host}/${collectionDir}/${itemDir}`,
-                  viewport: thumbnailSize,
                 })
               )
 
@@ -72,7 +63,7 @@ const buildMeta = async () => {
   )
 
   fs.writeJSONSync(path.join(OUTPUT_PATH, 'meta.json'), meta, { spaces: 2 })
-  await closePuppeteerBrowser()
+  await closeBrowser()
   server.close()
 }
 
