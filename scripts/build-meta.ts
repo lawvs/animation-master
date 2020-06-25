@@ -36,26 +36,28 @@ const buildMeta = async () => {
       .filter((maybeFolder) =>
         fs.statSync(path.resolve(FOLDER, maybeFolder)).isDirectory()
       )
-      .map(async (dir) => ({
-        name: dir,
+      .map(async (collectionDir) => ({
+        name: collectionDir,
         item: await Promise.all(
           fs
-            .readdirSync(path.resolve(FOLDER, dir))
+            .readdirSync(path.resolve(FOLDER, collectionDir))
             .filter((maybeFolder) =>
-              fs.statSync(path.resolve(FOLDER, dir, maybeFolder)).isDirectory()
+              fs
+                .statSync(path.resolve(FOLDER, collectionDir, maybeFolder))
+                .isDirectory()
             )
-            .map(async (filename) => {
-              const curPath = path.join(FOLDER, dir, filename)
+            .map(async (itemDir) => {
+              const curPath = path.join(FOLDER, collectionDir, itemDir)
               const thumbnail = path.relative(
                 OUTPUT_PATH,
                 await screenshot({
-                  url: `http://${host}/${dir}/${filename}`,
+                  url: `http://${host}/${collectionDir}/${itemDir}`,
                   viewport: thumbnailSize,
                 })
               )
 
               return {
-                id: filename,
+                id: itemDir,
                 path: curPath,
                 thumbnail,
                 ...parseHTML(
