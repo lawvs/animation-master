@@ -5,16 +5,19 @@
   "main": "",
   "scripts": {
     "dev": "browser-sync start --server --watch",
-    "build": "ts-node scripts/build-meta.ts"
+    "build": "ts-node scripts/build-meta.ts",
+    "clean": "rm -rf build"
   },
   "repository": "git@github.com:lawvs/animation-master.git",
   "author": "lawvs <litusq@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@types/fs-extra": "^9.0.1",
+    "@types/jsdom": "^16.2.3",
     "@types/node": "^14.0.13",
     "browser-sync": "^2.26.7",
     "fs-extra": "^9.0.1",
+    "jsdom": "^16.2.2",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.5"
   }
