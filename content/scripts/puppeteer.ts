@@ -3,7 +3,7 @@ import * as puppeteer from 'puppeteer'
 import { ensureDirSync } from 'fs-extra'
 
 const TMP_PATH = path.join('build', 'tmp')
-const OUTPUT_PATH = path.join('build', 'thumbnail')
+const OUTPUT_PATH = path.join('build', 'thumbnails')
 ensureDirSync(OUTPUT_PATH)
 
 let browser: puppeteer.Browser = null

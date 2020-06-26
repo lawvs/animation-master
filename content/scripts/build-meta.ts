@@ -6,7 +6,7 @@ import { launchStaticServer } from './server'
 import { setupBrowser, closeBrowser, takeScreenshot } from './puppeteer'
 
 const OUTPUT_PATH = path.resolve('build')
-const FOLDER = 'content'
+const FOLDER = 'src'
 fs.ensureDirSync(OUTPUT_PATH)
 
 const parseHTML = (html: string) => {
@@ -49,7 +49,7 @@ const buildMeta = async () => {
 
               return {
                 id: itemDir,
-                path: curPath,
+                path: path.join(collectionDir, itemDir),
                 thumbnail,
                 ...parseHTML(
                   fs.readFileSync(path.resolve(curPath, 'index.html'), {
