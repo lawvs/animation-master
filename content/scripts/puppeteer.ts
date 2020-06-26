@@ -1,15 +1,15 @@
-import * as path from 'path'
-import * as puppeteer from 'puppeteer'
+import path from 'path'
+import puppeteer from 'puppeteer'
 import { ensureDirSync } from 'fs-extra'
 
 const TMP_PATH = path.join('build', 'tmp')
 const OUTPUT_PATH = path.join('build', 'thumbnails')
 ensureDirSync(OUTPUT_PATH)
 
-let browser: puppeteer.Browser = null
+let browser: puppeteer.Browser | null = null
 
 export const setupBrowser = async () => {
-  if (browser) await browser?.close()
+  if (browser) await browser.close()
   // See https://github.com/puppeteer/puppeteer/issues/1837
   const options = {
     args: [
@@ -64,7 +64,7 @@ export const takeScreenshot = async ({
 }
 
 export const closeBrowser = async () => {
-  await browser?.close()
+  if (browser) await browser.close()
   browser = null
 }
 
