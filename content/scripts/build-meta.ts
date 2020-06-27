@@ -49,7 +49,7 @@ const buildMeta = async () => {
 
               return {
                 id: itemDir,
-                path: path.join(collectionDir, itemDir),
+                path: path.join(collectionDir, itemDir, 'index.html'),
                 thumbnail,
                 ...parseHTML(
                   fs.readFileSync(path.resolve(curPath, 'index.html'), {
