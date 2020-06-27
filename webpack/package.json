@@ -4,6 +4,9 @@
   "main": "index.ts",
   "author": "lawvs <litusq@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "clean": "echo \"Skip webpack clean.\""
+  },
   "peerDependencies": {
     "@types/react-dom": "^16.9.8",
     "@types/styled-components": "^5.1.0",

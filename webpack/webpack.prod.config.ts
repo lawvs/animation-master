@@ -22,10 +22,7 @@ const plugins: Plugin[] = [
         noErrorOnMissing: true,
       },
       {
-        from: path.join(
-          path.dirname(require.resolve('@animation-master/content')),
-          'src'
-        ),
+        from: config.animationContentDir,
       },
     ],
   }),

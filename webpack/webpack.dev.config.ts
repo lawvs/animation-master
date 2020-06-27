@@ -24,11 +24,7 @@ const webpackConfig: Configuration = merge(baseWebpackConfig, {
     historyApiFallback: true,
     contentBase: [
       resolvePath('public'), // static assets
-      // @animation-master/content/src
-      path.join(
-        path.dirname(require.resolve('@animation-master/content')),
-        'src'
-      ),
+      config.animationContentDir,
     ],
   },
   performance: {
