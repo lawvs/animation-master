@@ -1,3 +1,4 @@
+/// <reference path="../src/styled.d.ts"/>
 import fs from 'fs'
 import path from 'path'
 import React from 'react'
