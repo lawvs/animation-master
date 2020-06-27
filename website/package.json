@@ -10,7 +10,7 @@
     "start": "yarn dev",
     "dev": "webpack-dev-server --config scripts/webpack.config.ts --mode=development --colors --watch --hot",
     "build": "webpack --config scripts/webpack.config.ts --mode=production --colors",
-    "build:ssr": "export SSR=1 && yarn build && ts-node scripts/prerender.ts",
+    "build:ssr": "export SSR=1 && yarn build && ts-node --transpile-only scripts/prerender.ts",
     "build:static": "export SSR_STATIC=1 && yarn build:ssr",
     "typecheck": "tsc --noEmit --project .",
     "clean": "rm -rf dist"
