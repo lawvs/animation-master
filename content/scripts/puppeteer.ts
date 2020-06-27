@@ -2,7 +2,7 @@ import path from 'path'
 import puppeteer from 'puppeteer'
 import { ensureDirSync } from 'fs-extra'
 
-const TMP_PATH = path.join('build', 'tmp')
+const CACHE_PATH = path.join('node_modules', '.cache', 'puppeteer')
 const OUTPUT_PATH = path.join('build', 'thumbnails')
 ensureDirSync(OUTPUT_PATH)
 
@@ -22,7 +22,7 @@ export const setupBrowser = async () => {
       // '--disable-dev-shm-usage',
       // '--no-first-run',
     ],
-    userDataDir: TMP_PATH,
+    userDataDir: CACHE_PATH,
     // executablePath: '/usr/bin/chromium-browser',
   }
   browser = await puppeteer.launch(options)
