@@ -11,6 +11,7 @@
     "build:content": "yarn workspace @animation-master/content build",
     "dev:website": "yarn workspace @animation-master/website dev",
     "build:website": "yarn workspace @animation-master/website build:ssr",
+    "build": "yarn build:content && yarn build:website",
     "lint": "prettier --write \"./**/*.ts?(x)\"",
     "clean": "yarn workspaces run clean"
   },
