@@ -2,6 +2,7 @@
   "name": "@animation-master/content",
   "version": "0.1.1",
   "description": "animation",
+  "main": "index.ts",
   "scripts": {
     "dev": "browser-sync start --server --watch",
     "build": "ts-node scripts/build-meta.ts",

@@ -5,7 +5,7 @@ import { JSDOM } from 'jsdom'
 import { launchStaticServer } from './server'
 import { setupBrowser, closeBrowser, takeScreenshot } from './puppeteer'
 
-const OUTPUT_PATH = path.resolve('build')
+const OUTPUT_PATH = 'build'
 const FOLDER = 'src'
 fs.ensureDirSync(OUTPUT_PATH)
 
