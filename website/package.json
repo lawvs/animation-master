@@ -1,0 +1,31 @@
+{
+  "name": "@animation-master/website",
+  "version": "0.0.1",
+  "description": "the website of animation master",
+  "main": "index.js",
+  "repository": "git+https@github.com:lawvs/animation-master.git",
+  "author": "lawvs <litusq@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn dev",
+    "dev": "webpack-dev-server --config scripts/webpack.config.ts --mode=development --colors --watch --hot",
+    "build": "webpack --config scripts/webpack.config.ts --mode=production --colors",
+    "build:ssr": "export SSR=1 && yarn build && ts-node scripts/prerender.ts",
+    "build:static": "export SSR_STATIC=1 && yarn build:ssr",
+    "typecheck": "tsc --noEmit --project .",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@animation-master/content": "0.1.1",
+    "@animation-master/webpack": "0.0.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.1.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.41",
+    "@types/react-dom": "^16.9.8",
+    "@types/styled-components": "^5.1.0",
+    "webpack-cli": "^3.3.12"
+  }
+}
