@@ -1,6 +1,6 @@
 {
   "name": "@animation-master/website",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "the website of animation master",
   "main": "index.js",
   "repository": "git+https@github.com:lawvs/animation-master.git",
@@ -16,8 +16,8 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@animation-master/content": "0.1.1",
-    "@animation-master/webpack": "0.0.1",
+    "@animation-master/content": "0.1.2",
+    "@animation-master/webpack": "0.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "styled-components": "^5.1.1"
