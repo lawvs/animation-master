@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
+import path from 'path'
 import merge from 'webpack-merge'
 import type { Configuration as WebpackConfiguration } from 'webpack'
 import type { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server'
@@ -22,7 +22,14 @@ const webpackConfig: Configuration = merge(baseWebpackConfig, {
     port: config.port,
     open: true,
     historyApiFallback: true,
-    contentBase: resolvePath('public'), // static assets
+    contentBase: [
+      resolvePath('public'), // static assets
+      // @animation-master/content/src
+      path.join(
+        path.dirname(require.resolve('@animation-master/content')),
+        'src'
+      ),
+    ],
   },
   performance: {
     hints: false,
