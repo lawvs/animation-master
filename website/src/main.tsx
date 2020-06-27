@@ -68,7 +68,7 @@ const Item = ({ item }: { item: AnimationItem }) => {
   return (
     <a
       className="item"
-      href={'./' + item.path + '/index.html'}
+      href={`./${item.path}`}
       target="_blank"
       rel="noopener noreferrer"
     >
