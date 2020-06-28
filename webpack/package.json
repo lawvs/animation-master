@@ -14,10 +14,10 @@
     "styled-components": "^5.1.1"
   },
   "dependencies": {
-    "awesome-typescript-loader": "^5.2.1",
     "copy-webpack-plugin": "^6.0.2",
     "html-webpack-plugin": "^4.3.0",
     "html-webpack-template": "^6.2.0",
+    "ts-loader": "^7.0.5",
     "url-loader": "^4.1.0",
     "webpack": "^4.43.0",
     "webpack-bundle-analyzer": "^3.8.0",
