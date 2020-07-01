@@ -35,5 +35,6 @@ export const config = {
         content: process.env.npm_package_description,
       },
     ],
+    links: ['https://fonts.googleapis.com/css2?family=Open+Sans&display=swap'],
   },
 } as const
