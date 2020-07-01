@@ -2,7 +2,10 @@ import React, { useState, useEffect, HtmlHTMLAttributes } from 'react'
 import styled from 'styled-components'
 
 import { meta } from '@animation-master/content'
-import type { AnimationItem } from '@animation-master/content'
+import type {
+  AnimationCollection,
+  AnimationItem,
+} from '@animation-master/content'
 import { easeInOutBack } from './utils/easing'
 
 const Wrapper = styled.main`
@@ -26,8 +29,8 @@ const Card = styled.div`
 
 const ItemWrapper = styled.div`
   display: flex;
+  justify-content: space-around;
   flex-wrap: wrap;
-  padding: 20px;
   position: relative;
 
   .item {
@@ -108,35 +111,33 @@ const BackgroundIframe = styled.iframe`
 `
 
 const CollectionTitle = styled.h5`
+  font-size: 34px;
   position: relative;
+  text-transform: capitalize;
+  margin: 0 20px 20px;
 `
 
-const Collection = () => {
-  // TODO fix multiple collection preview
+const Collection = ({ collection }: { collection: AnimationCollection }) => {
   const [backPreview, setPreview] = useState<string | null>()
 
   return (
     <>
-      {meta.map((collection) => {
-        return (
-          <Card key={collection.name}>
-            <BackgroundIframe
-              src={backPreview ? `./${backPreview}` : undefined}
-            ></BackgroundIframe>
-            <CollectionTitle>{collection.name}</CollectionTitle>
-            <ItemWrapper>
-              {collection.item.map((item) => (
-                <Item
-                  item={item}
-                  key={item.id}
-                  onMouseEnter={() => setPreview(item.path)}
-                  onMouseLeave={() => setPreview(null)}
-                ></Item>
-              ))}
-            </ItemWrapper>
-          </Card>
-        )
-      })}
+      <Card>
+        <BackgroundIframe
+          src={backPreview ? `./${backPreview}` : undefined}
+        ></BackgroundIframe>
+        <CollectionTitle>{collection.name}</CollectionTitle>
+        <ItemWrapper>
+          {collection.item.map((item) => (
+            <Item
+              item={item}
+              key={item.id}
+              onMouseEnter={() => setPreview(item.path)}
+              onMouseLeave={() => setPreview(null)}
+            ></Item>
+          ))}
+        </ItemWrapper>
+      </Card>
     </>
   )
 }
@@ -144,7 +145,8 @@ const Collection = () => {
 export const Main = () => (
   <Wrapper>
     {/* <div>Animation Master</div> */}
-
-    <Collection />
+    {meta.map((collection) => (
+      <Collection collection={collection} key={collection.name} />
+    ))}
   </Wrapper>
 )

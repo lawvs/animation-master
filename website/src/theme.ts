@@ -1,9 +1,9 @@
 import type { DefaultTheme } from 'styled-components'
 
 export const theme: Required<DefaultTheme> = {
-  background: '#d1d8dc',
+  background: '#f7f9fb',
   maxWidth: '1080px',
-  borderRadius: '8px',
+  borderRadius: '16px',
 
   typography: {
     fontFamily:
