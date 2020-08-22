@@ -28,6 +28,29 @@ if (!('finished' in Animation.prototype)) {
   )
 }
 
+/**
+ * @param {Element} element
+ * @param {number} [from]
+ * @param {number} [to]
+ * @param {number} [duration]
+ */
+const rotateHelper = (element, from = 0, to = 0, duration = 100) =>
+  element.animate(
+    [
+      {
+        transform: `rotate(${from}deg)`,
+      },
+      {
+        transform: `rotate(${to}deg)`,
+      },
+    ],
+    {
+      duration,
+      easing: 'ease',
+      fill: 'forwards',
+    }
+  )
+
 const animation = async () => {
   const shapeA = document.querySelector('.a')
   const shapeB = document.querySelector('.b')
@@ -51,117 +74,27 @@ const animation = async () => {
     },
   ]
 
-  await shapeB.animate(
-    [
-      {
-        transform: 'rotate(0)',
-      },
-      {
-        transform: 'rotate(7deg)',
-      },
-    ],
-    {
-      duration: 200,
-      easing: 'ease',
-      fill: 'forwards',
-    }
-  ).finished
-
-  await shapeB.animate(
-    [
-      {
-        transform: 'rotate(7deg)',
-      },
-      {
-        transform: 'rotate(-45deg)',
-      },
-    ],
-    {
-      duration: 700,
-      easing: 'ease',
-      fill: 'forwards',
-    }
-  ).finished
+  await rotateHelper(shapeB, 0, 7, 200).finished
+  await rotateHelper(shapeB, 7, -45, 700).finished
 
   const animateA = shapeA.animate(...blurAnimateArgs)
   const animateC = shapeC.animate(...blurAnimateArgs)
 
-  await shapeB.animate(
-    [
-      {
-        transform: 'rotate(-45deg)',
-      },
-      {
-        transform: 'rotate(-42deg)',
-      },
-    ],
-    {
-      duration: 200,
-      fill: 'forwards',
-    }
-  ).finished
-
-  const shakeAnimate = await shapeB.animate(
-    [
-      {
-        transform: 'rotate(-42deg)',
-      },
-      {
-        transform: 'rotate(-36deg)',
-      },
-    ],
-    {
-      duration: 100,
-      fill: 'forwards',
-    }
-  ).finished
-
-  shakeAnimate.reverse()
-  await sleep(100)
-  shakeAnimate.reverse()
-  await sleep(100)
-  shakeAnimate.reverse()
-  await sleep(100)
-  shakeAnimate.reverse()
-  await sleep(100)
-  shakeAnimate.reverse()
+  await rotateHelper(shapeB, -45, -42, 200).finished
+  for (let i = 0; i < 3; i++) {
+    await rotateHelper(shapeB, -42, -36).finished
+    await rotateHelper(shapeB, -36, -42).finished
+  }
+  await rotateHelper(shapeB, -42, -36).finished
+  await rotateHelper(shapeB, -36, -47, 200).finished
 
   await sleep(400)
 
   animateA.reverse()
   animateC.reverse()
 
-  await shapeB.animate(
-    [
-      {
-        transform: 'rotate(-42deg)',
-      },
-      {
-        transform: 'rotate(2deg)',
-      },
-    ],
-    {
-      duration: 400,
-      easing: 'ease',
-      fill: 'forwards',
-    }
-  ).finished
-
-  await shapeB.animate(
-    [
-      {
-        transform: 'rotate(2deg)',
-      },
-      {
-        transform: 'rotate(0)',
-      },
-    ],
-    {
-      duration: 200,
-      easing: 'ease',
-      fill: 'forwards',
-    }
-  ).finished
+  await rotateHelper(shapeB, -47, 2, 400).finished
+  await rotateHelper(shapeB, 2, 0, 200).finished
 }
 
 const main = async () => {
