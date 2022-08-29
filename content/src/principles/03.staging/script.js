@@ -1,55 +1,6 @@
 const sleep = (duration) =>
   new Promise((res) => setTimeout(() => res(), duration))
 
-// A simple polyfill for `animate.finished`
-// For full implementation please see
-// https://github.com/web-animations/web-animations-js/blob/dev/src/web-animations-next-animation.js#L168
-if (!('finished' in Animation.prototype)) {
-  window.Element.prototype.animate = new Proxy(
-    window.Element.prototype.animate,
-    {
-      apply(target, ctx, args) {
-        const animate = Reflect.apply(target, ctx, args)
-
-        animate.finished = new Promise((res) => {
-          if (animate.playState === 'finished') {
-            res(animate)
-            return
-          }
-
-          animate.addEventListener('finish', () => res(animate), {
-            once: true,
-            passive: true,
-          })
-        })
-        return animate
-      },
-    }
-  )
-}
-
-/**
- * @param {Element} element
- * @param {number} [from]
- * @param {number} [to]
- * @param {number} [duration]
- */
-const rotateHelper = (element, from = 0, to = 0, duration = 100) =>
-  element.animate(
-    [
-      {
-        transform: `rotate(${from}deg)`,
-      },
-      {
-        transform: `rotate(${to}deg)`,
-      },
-    ],
-    {
-      duration,
-      easing: 'ease',
-      fill: 'forwards',
-    }
-  )
 
 const animation = async () => {
   const shapeA = document.querySelector('.a')
