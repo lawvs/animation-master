@@ -1,0 +1,8 @@
+{
+  "name": "animation master project homepage",
+  "short_name": "animation master",
+  "icons": [],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}

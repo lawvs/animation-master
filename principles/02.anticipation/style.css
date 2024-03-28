@@ -1,0 +1,58 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#main {
+  width: 100vw;
+  height: 100vh;
+  background-color: #e9b59f;
+  position: relative;
+  overflow: hidden;
+}
+
+:root {
+  --shape-width: 15vmin;
+  --surface-width: 25vmin;
+}
+
+.shape {
+  position: absolute;
+  right: calc(50% - var(--shape-width) / 2);
+  top: calc(50% - var(--shape-width) / 2);
+  transform-origin: center bottom;
+}
+
+.shape {
+  width: var(--shape-width);
+  padding-top: var(--shape-width);
+  background-color: white;
+  opacity: 0;
+}
+
+.shape::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.shape::before {
+  width: 65%;
+  height: 65%;
+  background-color: #409ad5;
+}
+
+.surface {
+  position: absolute;
+  right: 50%;
+  bottom: calc(50% - var(--shape-width) / 2);
+  transform: translate(50%, 100%);
+}
+
+.surface {
+  height: 3%;
+  width: 25vmin;
+  background-color: black;
+}
