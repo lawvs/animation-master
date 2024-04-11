@@ -1,0 +1,65 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#main {
+  width: 100vw;
+  height: 100vh;
+  background: #e9b59f;
+  position: relative;
+  overflow: hidden;
+}
+
+:root {
+  --shape-width: 15vmin;
+  --left: calc(20% - var(--shape-width) / 2);
+  --right: calc(80% - var(--shape-width) / 2);
+}
+
+.shape {
+  background: white;
+  width: var(--shape-width);
+  height: var(--shape-width);
+}
+
+.shape {
+  position: absolute;
+  bottom: calc(50% - var(--shape-width) / 2);
+  left: var(--left);
+}
+
+.shape {
+  animation: move 3s ease infinite;
+}
+
+.shape::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.shape::before {
+  width: 65%;
+  height: 65%;
+  background: #409ad5;
+}
+
+@keyframes move {
+  0%,
+  5% {
+    left: var(--left);
+  }
+
+  45%,
+  55% {
+    left: var(--right);
+  }
+
+  95%,
+  100% {
+    left: var(--left);
+  }
+}

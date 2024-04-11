@@ -1,0 +1,104 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#main {
+  width: 100vw;
+  height: 100vh;
+  background: #e9b59f;
+  position: relative;
+  overflow: hidden;
+}
+
+:root {
+  --shape-width: 15vmin;
+  --left: calc(20% - var(--shape-width) / 2);
+  --right: calc(80% - var(--shape-width) / 2);
+  --top: calc(100% - var(--shape-width) / 2);
+  --bottom: calc(20% - var(--shape-width) / 2);
+}
+
+.shape {
+  box-sizing: border-box;
+  background: #409ad5;
+  width: var(--shape-width);
+  height: var(--shape-width);
+  border: white solid calc(var(--shape-width) * 0.2);
+  border-radius: 50%;
+}
+
+.shape {
+  position: absolute;
+  bottom: var(--top);
+  left: var(--left);
+}
+
+.shape {
+  animation: move 6s linear infinite, bounce 6s linear infinite;
+}
+
+@keyframes move {
+  0% {
+    left: var(--left);
+    opacity: 0;
+  }
+
+  15% {
+    left: var(--left);
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    left: var(--right);
+    opacity: 0;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    bottom: var(--top);
+    /* easeInCubic */
+    animation-timing-function: cubic-bezier(0.32, 0, 0.67, 0);
+  }
+
+  15% {
+    bottom: var(--bottom);
+    /* easeOutCubic */
+    animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  25% {
+    bottom: calc((var(--top) + var(--bottom)) * 0.6);
+    animation-timing-function: cubic-bezier(0.32, 0, 0.67, 0);
+  }
+
+  35% {
+    bottom: var(--bottom);
+    animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  45% {
+    bottom: calc((var(--top) + var(--bottom)) * 0.4);
+    animation-timing-function: cubic-bezier(0.32, 0, 0.67, 0);
+  }
+
+  55% {
+    bottom: var(--bottom);
+    animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  65% {
+    bottom: calc((var(--top) + var(--bottom)) * 0.2);
+    animation-timing-function: cubic-bezier(0.32, 0, 0.67, 0);
+  }
+
+  70%,
+  100% {
+    bottom: var(--bottom);
+  }
+}
