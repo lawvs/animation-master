@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#main {
+  width: 100vw;
+  height: 100vh;
+  background: #e9b59f;
+  position: relative;
+  overflow: hidden;
+}
+
+:root {
+  --shape-width: 20vmin;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 calc(var(--shape-width) * 0.1);
+}
+
+.shape {
+  box-sizing: border-box;
+  width: var(--shape-width);
+  height: var(--shape-width);
+  border: white solid calc(var(--shape-width) * 0.2);
+  background: #409ad5;
+}
+
+.shape + .shape {
+  margin-left: calc(var(--shape-width) * 0.5);
+}
