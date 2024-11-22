@@ -1,0 +1,44 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#main {
+  width: 100vw;
+  height: 100vh;
+  background: #e9b59f;
+  position: relative;
+  overflow: hidden;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+:root {
+  --shape-width: 20vmin;
+}
+
+.shape {
+  box-sizing: border-box;
+  position: relative;
+  background: white;
+  width: var(--shape-width);
+  height: var(--shape-width);
+}
+
+.shape::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.shape::before {
+  width: 65%;
+  height: 65%;
+  background: #409ad5;
+}
